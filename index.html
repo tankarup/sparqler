@@ -36,6 +36,23 @@
             max-width: 300px;
             overflow-y: auto;
         }
+        #menu {
+
+            margin: 2px;
+
+        }
+        .imasparql {
+            color: white;
+            text-decoration: underline;
+            font-weight: bold;
+            font-style: italic;
+        }
+        .btn {
+            color: white;
+        }
+        .table_head a{
+            color: white;
+        }
 
 
     </style>
@@ -45,12 +62,21 @@
     <nav class="navbar navbar-primary bg-primary text-light p-0">
         
         <h1 class="h3">[testing]Sp@rqler <span id="query_str"></span></h1>
+        <p>All data obtained from <a class="imasparql" href="https://sparql.crssnky.xyz/imas/" target="_blank">im@sparql</a></p>
         
-        <div id="menu"></div>
     </nav>
-    <p>All data obtained from <a href="https://sparql.crssnky.xyz/imas/" target="_blank">im@sparql</a></p>
+    <div id="menu"></div>
+    
 
-        <div id="results"></div>
+        <div id="results">
+            <ul>
+                <!--<li><span class="bg-info text-light">↑↑興味のあるカテゴリーのボタンを押してください。↑↑</span></li>-->
+                <li>アイドルマスターのデータベース"<a href="https://sparql.crssnky.xyz/imas/" target="_blank">im@sparql</a>"からデータを取得して、表形式で表示します。</li>
+                <li>表内のテキストをクリックすると、クリックしたテキストを検索キーにしてデータを再検索します。</li>
+                <li>ちゃんとした検索をしたい場合は<a href="https://sparql.crssnky.xyz/imas/" target="_blank">元サイト</a>をご利用ください。</li>
+                <li>素晴らしいデータベースim@sparqlを構築されたコントリビュータの方々に感謝します。</li>
+            </ul>
+        </div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

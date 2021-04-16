@@ -19,10 +19,13 @@ function init_menu(){
         "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#Unit",
         "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#Clothes",
         "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#Live",
+        "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#Communication",
+        "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#SetlistNumber",
+        //"https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#ScriptText",
         "http://schema.org/MusicAlbum",
         "http://schema.org/MusicRelease",
         "http://schema.org/MusicComposition",
-        "http://schema.org/MusicRecording"
+        "http://schema.org/MusicRecording",
         ];
 
     let html = '';
@@ -64,15 +67,32 @@ function simple_label(item){
     return text_to_label(label);
 
 }
+
+function link_label(item){
+    if(Array.isArray(item)){
+        return item.map(function(item){
+            return link_label(item);
+        }).join(', ');
+    }
+
+    const uri = item;
+    let label = item;
+    const matched = uri.match(/http.*[/#]([^\/]*)$/);
+    if (matched){
+        label = `<a href="${uri}" target="_blank">${decodeURI(matched[1])}</a>`;
+    }
+    return text_to_label(label);
+}
+
 function is_uri(text){
-    return text.match(/http.*[/#]([^\/]*)$/);
+    return text.match(/^http/);
 }
 //テキストをクリックしたら新しく検索するリンクを付ける
-function clickable_label(category, item){
+function query_label(category, item){
     //受取るアイテムは基本は配列なので、リンクを作ってあとでつなげる。
     if(Array.isArray(item)){
         return item.map(function(item){
-            return clickable_label(category, item);
+            return query_label(category, item);
         }).join(', ');
     }
 
@@ -190,7 +210,7 @@ function update_table(){
     html += '<thead class="thead-dark"><tr>';
     html += '<th>Subject</th>'
     for (let v of vs){
-        html += `<th>${simple_label(v)}<span class="query" onclick="click_to_sort('${v}');">[↕️]</span></th>`;
+        html += `<th><span class="table_head">${link_label(v)}</span><span class="query" onclick="click_to_sort('${v}');">[↕]</span></th>`;
     }
     html += '</tr></thead>';
     html += '<tbody>';
@@ -205,7 +225,7 @@ function update_table(){
             let vlabel = '';
             let bgcolor = '';
             if (unit[v]){
-                vlabel = clickable_label(v, unit[v]);
+                vlabel = query_label(v, unit[v]);
                 if (v == "https://sparql.crssnky.xyz/imasrdf/URIs/imas-schema.ttl#Color"){
                     bgcolor = unit[v][0].value;
                     //console.log(v, unit[v]);
