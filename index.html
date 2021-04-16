@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+	<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>[test]Sp@rqler</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+    integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+
+    <link rel="stylesheet" href="https://tankarup.github.io/million.css">
+    <style>
+
+        thead th {
+            position: -webkit-sticky;
+            position: sticky;
+            top: 0;
+            /* tbody内のセルより手前に表示する */
+            z-index: 1;
+            text-align: center;
+        }
+
+        .query {
+            text-decoration: underline;
+            cursor: pointer;
+        }
+        #query_str{
+            font-size: medium;
+            font-style: italic;
+            text-decoration: underline;
+        }
+        .cell_content {
+            max-height: 100px;
+            max-width: 300px;
+            overflow-y: auto;
+        }
+
+
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-primary bg-primary text-light p-0">
+        
+        <h1 class="h3">[testing]Sp@rqler <span id="query_str"></span></h1>
+        
+        <div id="menu"></div>
+    </nav>
+    <p>All data obtained from <a href="https://sparql.crssnky.xyz/imas/" target="_blank">im@sparql</a></p>
+
+        <div id="results"></div>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="units.js"></script>
+    <script src="main.js"></script>
+    <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+</body>
+
+</html>
+
