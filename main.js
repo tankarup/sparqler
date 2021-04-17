@@ -208,7 +208,7 @@ function update_table(){
     let html = '';
     html += '<table class="table table-striped" style="max-width: 100%;">';
     html += '<thead class="thead-dark"><tr>';
-    html += '<th>Subject</th>'
+    html += '<th>Data</th>'
     for (let v of vs){
         html += `<th><span class="table_head">${link_label(v)}</span><span class="query" onclick="click_to_sort('${v}');">[↕]</span></th>`;
     }
@@ -257,6 +257,9 @@ function query_from_sparql(sparql_v, sparql_o){
     let obj_str = simple_label(sparql_o);
     if (obj_str.length > 20) obj_str = obj_str.slice(0,20) + '...';
     document.getElementById('query_str').innerText = ` ${simple_label(sparql_v)} = ${obj_str}`;
+
+    //タイトルの大きさを控えめに
+    document.getElementById('title').style.fontSize = "small";
     //show_results(units);
     
     const format_v = `<${sparql_v}>`;
