@@ -206,9 +206,10 @@ function table_sort(key){
 function update_table(){
 
     let html = '';
-    html += '<table class="table table-striped" style="max-width: 100%;">';
+    html += '<table class="table table-striped">';
     html += '<thead class="thead-dark"><tr>';
-    html += '<th><div class="cell_content">Data</div></th>'
+    html += '<th><div class="cell_content">No.</div></th>';
+    html += '<th><div class="cell_content">Data</div></th>';
     for (let v of vs){
         html += `<th><div class="cell_content"><span class="table_head">${link_label(v)}</span><span class="query" onclick="click_to_sort('${v}');">[↕]</span></div></th>`;
     }
@@ -219,8 +220,9 @@ function update_table(){
         const key =found_list[i].key;
         const unit = found_list[i].data;
         html += '<tr>';
+        html += `<td><div class="cell_content">${i+1}</div></td>`;
         const a_link = is_uri(key) ? `<a href="${key}" target="_blank" style="font-size: x-small;">🔗</a>` : '';
-        html += `<td><div class="cell_content">${simple_label(key)}${a_link}</div></td>`
+        html += `<td><div class="cell_content">${simple_label(key)}${a_link}</div></td>`;
         for (let v of vs){
             let vlabel = '';
             let bgcolor = '';
