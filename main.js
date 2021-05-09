@@ -36,6 +36,17 @@ function init_menu(){
     //html += '</ul>';
     document.getElementById('menu').innerHTML = html;
 
+    //ブランド選択メニュー
+    let options_html = '';
+    for (let brand of brand_list){
+        options_html += `<option value="${brand}">${brand}</option>`;
+    }
+    const brand_menu = document.getElementById('brand');
+    brand_menu.innerHTML = '<option value="">ブランド</option>' + options_html;
+    brand_menu.addEventListener('change', function(){
+        update_table();
+    });
+
 }
 
 function text_to_label(text){
@@ -119,6 +130,8 @@ function query_label(category, item){
 
 }
 
+
+
 function prepare_data(results){
     let data = {};
     vs = [];
@@ -127,6 +140,7 @@ function prepare_data(results){
         const s = item.s.value;
         const v = item.v.value;
         const o = item.o.value;
+
 
         if (!data[s]) data[s] = {};
         if (!data[s][v]) data[s][v] = [];
@@ -203,6 +217,20 @@ function table_sort(key){
     }
 
 }
+
+function is_matched(uri){
+    //ブランドメニューで選んだもの
+    const brand = document.getElementById('brand').value;
+    //何も選んでなかったら全部OK
+    if (!brand) return true;
+    //アイドルURIのブランドが一致していたらOK
+    if (uri_to_brand[uri] === brand){
+        return true;
+    }
+    //全部ダメなら不可
+    return false;
+}
+
 function update_table(){
 
     let html = '';
@@ -215,14 +243,19 @@ function update_table(){
     }
     html += '</tr></thead>';
     html += '<tbody>';
+    let index = 1;
     //
     for (let i = 0; i < found_list.length; i++){
         const key =found_list[i].key;
         const unit = found_list[i].data;
-        html += '<tr>';
-        html += `<td><div class="cell_content">${i+1}</div></td>`;
+        let tr = '';
+        let is_good = false;//除外対象か
+        is_good = is_good || is_matched(key);
+
+        tr += '<tr>';
+        tr += `<td><div class="cell_content">${index}</div></td>`;
         const a_link = is_uri(key) ? `<a href="${key}" target="_blank" style="font-size: x-small;">🔗</a>` : '';
-        html += `<td><div class="cell_content">${simple_label(key)}${a_link}</div></td>`;
+        tr += `<td><div class="cell_content">${simple_label(key)}${a_link}</div></td>`;
         for (let v of vs){
             let vlabel = '';
             let bgcolor = '';
@@ -232,12 +265,21 @@ function update_table(){
                     bgcolor = unit[v][0].value;
                     //console.log(v, unit[v]);
                 }
+                
+                for (let item of unit[v]){
+                    is_good = is_good || is_matched(item.value);
+                }
             }
 
-            html += `<td style="background-color: #${bgcolor};"><div class="cell_content">${vlabel}</div></td>`;
+            tr += `<td style="background-color: #${bgcolor};"><div class="cell_content">${vlabel}</div></td>`;
         }
 
-        html += '</tr>';
+        tr += '</tr>';
+
+        if (!is_good) continue;
+
+        html += tr;
+        index++;
 
     }
 
