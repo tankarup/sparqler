@@ -73,7 +73,7 @@ function simple_label(item){
     let label = item;
     const matched = uri.match(/http.*[/#]([^\/]*)$/);
     if (matched){
-        label = `${decodeURI(matched[1])}`;
+        label = `${decodeURIComponent(matched[1])}`;
     }
     return text_to_label(label);
 
@@ -90,7 +90,7 @@ function link_label(item){
     let label = item;
     const matched = uri.match(/http.*[/#]([^\/]*)$/);
     if (matched){
-        label = `<a href="${uri}" target="_blank">${decodeURI(matched[1])}</a>`;
+        label = `<a href="${uri}" target="_blank">${decodeURIComponent(matched[1])}</a>`;
     }
     return text_to_label(label);
 }
@@ -115,7 +115,7 @@ function query_label(category, item){
     //受取った文字列がURI形式だったら、/か#以降の文字だけを抽出してラベルに使う
     const matched = uri.match(/http.*[/#]([^\/]*)$/);
     if (matched){
-        label = decodeURI(matched[1]);
+        label = decodeURIComponent(matched[1]);
     }
 
 
